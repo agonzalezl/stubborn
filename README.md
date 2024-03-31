@@ -1,5 +1,3 @@
-# stubborn
-A Python library that detects version mismatches between code and stub dependencies.
 # 🐐 Stubborn
 
 `stubborn` is a Python library designed to detect and manage version mismatches between code and stubs for type-aware programming, particularly focusing on managing dependencies in Poetry projects.
