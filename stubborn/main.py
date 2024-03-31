@@ -3,8 +3,12 @@ import os
 from .poetry_missmatch import get_missmatched_packages
 
 
-def main():
-    missmatched_packages = get_missmatched_packages(os.getcwd())
+def report_missmatched_versions(major, minor, patch, path):
+
+    if not path:
+        path = os.getcwd()
+
+    missmatched_packages = get_missmatched_packages(path, major, minor, patch)
 
     if not missmatched_packages:
         return

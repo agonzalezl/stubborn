@@ -12,13 +12,16 @@ def apply_dependency_constrain(dependency_name: str, constraint: str):
     subprocess.run(command, shell=True)
 
 
-def search(packages:list[Package], package_name: str)->Package:
+def search(packages: list[Package], package_name: str) -> Package:
     for package in packages:
         if package_name == package.name:
             return package
     return None
 
-def get_missmatched_packages(poetry_path: str) -> list[list]:
+
+def get_missmatched_packages(
+    poetry_path: str, major: bool, minor: bool, patch: bool
+) -> list[list]:
     poetry = Factory().create_poetry(Path(poetry_path))
     repository = poetry.locker.locked_repository()
 
@@ -31,8 +34,9 @@ def get_missmatched_packages(poetry_path: str) -> list[list]:
             continue
 
         if (
-            package.version.major != type_package.version.major
-            or package.version.minor != type_package.version.minor
+            (major and package.version.major != type_package.version.major)
+            or (minor and package.version.minor != type_package.version.minor)
+            or (patch and package.version.patch != type_package.version.patch)
         ):
             missmatched_packages.append(
                 [
