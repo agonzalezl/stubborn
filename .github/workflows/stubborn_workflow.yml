@@ -26,7 +26,17 @@ jobs:
         python -m stubborn >> stubborn-report.txt
         cat stubborn-report.txt
 
+    - name: Check if file is empty
+      id: check_stubborn_file
+      run: |
+        if [ -s "stubborn-report.txt" ]; then
+          echo "isempty=false" >> $GITHUB_ENV
+        else
+          echo "isempty=true" >> $GITHUB_ENV
+        fi
+
     - name: PR comment
+      if: steps.check_stubborn_file.outputs.isempty != 'true'
       uses: thollander/actions-comment-pull-request@bc14ce351a6a25022a490f2be0570c700083a7fe
       with:
         filePath: stubborn-report.txt
