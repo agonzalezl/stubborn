@@ -30,9 +30,9 @@ jobs:
       id: check_stubborn_file
       run: |
         if [ -s "stubborn-report.txt" ]; then
-          echo "isempty=false" >> $GITHUB_ENV
+          echo "isempty=false" >> $GITHUB_OUTPUT
         else
-          echo "isempty=true" >> $GITHUB_ENV
+          echo "isempty=true" >> $GITHUB_OUTPUT
         fi
 
     - name: PR comment
