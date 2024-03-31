@@ -66,3 +66,4 @@ jobs:
 ```
 
 Read more [here](https://julienrenaux.fr/2019/12/20/github-actions-security-risk/) about why to use commit hash instead of version in Github actions.
+
