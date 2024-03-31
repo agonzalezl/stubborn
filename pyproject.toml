@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "stubborn"
+version = "0.1.0"
+description = "A Python library that detects version mismatches between code and stub dependencies."
+authors = ["agonzalezl <angel.gonzalez.lpz@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+ruff = "0.3.4"
+poetry = "^1.8.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # pycodestyle warning
+    "W",
+]

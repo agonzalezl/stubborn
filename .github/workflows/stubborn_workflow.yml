@@ -1,0 +1,33 @@
+name: Stubborn workflow
+
+on:
+  pull_request:
+    branches: ['*']
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - uses: actions/setup-python@v3
+      with:
+        python-version: "3.11"
+    
+    - name: Install dependencies and stubborn
+      run: |
+        python -m pip install --upgrade pip
+        pip install git+http://git@github.com/agonzalezl/stubborn.git
+
+    - name: Get missmatched versions
+      run: |
+        python -m stubborn >> stubborn-report.txt
+        cat stubborn-report.txt
+
+    - name: PR comment
+      uses: thollander/actions-comment-pull-request@bc14ce351a6a25022a490f2be0570c700083a7fe
+      with:
+        filePath: stubborn-report.txt
+        comment_tag: stubborn-report
